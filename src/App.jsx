@@ -1,5 +1,7 @@
+//import { myHeading } from "../myHeading";
+
 const App = () => {
-  const playListTitle = "My cool playlist";
+  const playListTitle = "The best playlist";
   const songs = [
     {
       id: 1,
@@ -37,6 +39,15 @@ const App = () => {
       previewURL:
         "https://open.spotify.com/embed/track/029NqmIySn1kOY305AAhxT?utm_source=generator",
     },
+    {
+      id: 5,
+      title: "Pokérap",
+      artist: "Nintendo",
+      albumCover:
+        "https://i1.sndcdn.com/artworks-000134520122-jqs4mw-t500x500.jpg",
+      previewURL:
+        "https://open.spotify.com/embed/track/029NqmIySn1kOY305AAhxT?utm_source=generator",
+    },
   ];
   const playCounts = {
     Dreams: 10,
@@ -48,7 +59,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>React Intro</h1>
+      <Header title={playListTitle} />
+     <Songs songsArray={songs} playing={currentlyPlaying} playCounts={playCounts}/>
     </div>
   );
 };
@@ -56,3 +68,38 @@ const App = () => {
 export default App;
 
 // Create your new Components here
+
+const Header = ({title}) => {
+  return<h1>{title}</h1>
+}
+
+const Songs = ({songsArray, playing, playCounts}) => {
+  return (
+    <ul className="song-list">
+        {songsArray.map((song) => {
+          return <li className="song-item" key={song.title}>
+            <h2>{song.title}</h2>
+            <p>{song.artist}</p>
+            <img className="song-img" src={song.albumCover} alt={"album cover for song " + song.title + " by " + song.artist} />
+            <CurrentSong currentSong={song.title} songs={songsArray} current={playing} />
+            <NumberOfPlays song={song.title} count={playCounts}/>
+          </li>
+        })}
+    </ul>
+  )
+}
+
+const CurrentSong = ({ currentSong, songs, current}) => {
+  return currentSong === songs[current].title ? <p className="song-current" >Currently Playing</p> : <p></p>
+}
+
+const NumberOfPlays = ({ song, count }) => {
+  if (!count[song]) {
+    count[song] = 0
+  }
+    return <p>Number of plays: {count[song]}</p>
+}
+
+const TotalPlays = ({ count }) => {
+  return 
+}
