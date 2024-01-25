@@ -103,3 +103,7 @@ const NumberOfPlays = ({ song, count }) => {
 const TotalPlays = ({ count }) => {
   return 
 }
+
+// const initialValue = 0
+// const valuearray = (Object.values(object1).reduce((accumulator, currentValue) => accumulator + currentValue,
+//   initialValue, ));
